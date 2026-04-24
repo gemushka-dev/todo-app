@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { db } from "./src/database/database";
+import { errorMiddleware } from "./src/error/errorMiddleware";
 
 const PORT = 3500;
 
@@ -16,6 +17,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(errorMiddleware);
 
 async function start() {
   try {
