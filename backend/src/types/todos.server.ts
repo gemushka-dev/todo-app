@@ -1,10 +1,10 @@
 export type TodoStatus = "pending" | "completed";
 
-export type TodosResponse = {
-  todoId: number;
+export type TodoDB = {
+  todo_id: number;
   title: string;
   content: string | null;
   status: TodoStatus;
-  userId: number;
-  createdAt: string;
+  user_id: number;
+  created_at: string;
 };

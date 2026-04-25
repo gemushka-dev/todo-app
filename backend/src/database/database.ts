@@ -1,7 +1,7 @@
 import { pool } from "./pool";
-import { UserDB, UserResponse } from "../types/users.server";
+import { UserDB } from "../types/users.server";
 import { ClientUserDTO } from "../types/users.client";
-import { TodosResponse, TodoStatus } from "../types/todos.server";
+import { TodoDB, TodoStatus } from "../types/todos.server";
 import { TodosDTO } from "../types/todos.client";
 
 class Database {
@@ -38,32 +38,26 @@ class Database {
     await pool.query(indexQuery);
   }
 
-  async getUserById(userId: number): Promise<UserResponse | null> {
+  async getUserById(userId: number): Promise<UserDB | null> {
     const query = `
-    SELECT user_id AS userId, username, 
-    user_email AS userEmail, created_at AS createdAt
-    FROM users WHERE user_id = $1
+    SELECT * FROM users WHERE user_id = $1
     `;
     const data = await pool.query(query, [userId]);
     return data.rows[0] || null;
   }
   async getUserByEmail(email: string): Promise<UserDB | null> {
     const query = `
-      SELECT user_id AS userId, username, 
-      user_email AS userEmail, password,
-      created_at AS createdAt
-      FROM users WHERE user_email = $1
+      SELECT * FROM users WHERE user_email = $1
     `;
     const data = await pool.query(query, [email]);
     return data.rows[0] || null;
   }
 
-  async createUser(user: ClientUserDTO): Promise<UserResponse> {
+  async createUser(user: ClientUserDTO): Promise<UserDB> {
     const query = `
       INSERT INTO users(username, user_email , password) 
       VALUES($1, $2, $3) 
-      RETURNING user_id AS userId, username, 
-      user_email AS userEmail, created_at AS createdAt
+      RETURNING *
     `;
     const data = await pool.query(query, [
       user.username,
@@ -73,36 +67,28 @@ class Database {
     return data.rows[0];
   }
 
-  async getTodosByUserId(userId: number): Promise<TodosResponse[]> {
+  async getTodosByUserId(userId: number): Promise<TodoDB[]> {
     const query = `
-      SELECT todo_id AS todoId , title , content , 
-      status, user_id AS userId , created_at AS createdAt
-      FROM todos WHERE  user_id = $1
+      SELECT * FROM todos WHERE  user_id = $1
       ORDER BY created_at DESC
     `;
     const data = await pool.query(query, [userId]);
     return data.rows;
   }
 
-  async getTodoById(
-    todoId: number,
-    userId: number,
-  ): Promise<TodosResponse | null> {
+  async getTodoById(todoId: number, userId: number): Promise<TodoDB | null> {
     const query = `
-      SELECT todo_id AS todoId , title, content ,
-      status, user_id AS userId , created_at AS createdAt
-      FROM todos WHERE  todo_id = $1 AND user_id = $2
+      SELECT * FROM todos WHERE  todo_id = $1 AND user_id = $2
     `;
     const data = await pool.query(query, [todoId, userId]);
     return data.rows[0] || null;
   }
 
-  async createTodo(todos: TodosDTO): Promise<TodosResponse> {
+  async createTodo(todos: TodosDTO): Promise<TodoDB> {
     const query = `
       INSERT INTO todos(title,content , user_id) 
       VALUES($1, $2, $3) 
-      RETURNING todo_id AS todoId ,title , content ,
-      status, user_id AS userId , created_at AS createdAt
+      RETURNING *
     `;
     const data = await pool.query(query, [
       todos.title,
@@ -116,12 +102,11 @@ class Database {
     todoId: number,
     userId: number,
     status: TodoStatus,
-  ): Promise<TodosResponse | null> {
+  ): Promise<TodoDB | null> {
     const query = `
       UPDATE todos SET status = $1
       WHERE user_id = $2 AND todo_id = $3
-      RETURNING todo_id AS todoId ,title , content ,
-      status, user_id AS userId , created_at AS createdAt
+      RETURNING *
     `;
     const data = await pool.query(query, [status, userId, todoId]);
     return data.rows[0] || null;
