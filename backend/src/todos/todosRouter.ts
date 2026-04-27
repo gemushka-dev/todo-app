@@ -6,15 +6,16 @@ import {
   updateTodo,
   deleteTodo,
 } from "./todosController";
+import { authMiddleware } from "../auth/authMiddleware";
 
 export const todosRouter = Router();
 
-todosRouter.get("/todos", getTodosByUserId);
+todosRouter.get("/todos", authMiddleware, getTodosByUserId);
 
-todosRouter.get("/:id", getTodoById);
+todosRouter.get("/:id", authMiddleware, getTodoById);
 
-todosRouter.post("/create", createTodo);
+todosRouter.post("/create", authMiddleware, createTodo);
 
-todosRouter.put("/:id", updateTodo);
+todosRouter.put("/:id", authMiddleware, updateTodo);
 
-todosRouter.delete("/:id", deleteTodo);
+todosRouter.delete("/:id", authMiddleware, deleteTodo);
