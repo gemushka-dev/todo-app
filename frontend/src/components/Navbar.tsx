@@ -5,6 +5,7 @@ export const Navbar = () => {
   return (
     <>
       <nav className="nav">
+        <h2>Logo</h2>
         <ul className="nav__list">
           {NavData.map((el) => (
             <li key={el.href} className="list__item">
