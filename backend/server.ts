@@ -5,6 +5,7 @@ import { db } from "./src/database/database";
 import { errorMiddleware } from "./src/error/errorMiddleware";
 import { usersRouter } from "./src/users/usersRouter";
 import { todosRouter } from "./src/todos/todosRouter";
+import { identityMiddleware } from "./src/auth/identityMiddleware";
 
 const PORT = 3500;
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/users", usersRouter);
 app.use("/todos", todosRouter);
+app.get("/me", identityMiddleware);
 app.use(errorMiddleware);
 
 async function start() {
