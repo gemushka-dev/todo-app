@@ -4,6 +4,7 @@ import { HomePage } from "./pages/Homepage/Homepage";
 import "./style/main.css";
 import "./style/layout.css";
 import { useEffect, useState } from "react";
+import { Registerpage } from "./pages/Registerpage/Registerpage";
 
 export const App = () => {
   const [sharedData, setSharedData] = useState(null);
@@ -27,8 +28,17 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<LayOut data={sharedData} />}>
           <Route index path="/" element={<HomePage />} />
-          <Route path="/login" element={<h1>Login page</h1>} />
-          <Route path="/register" element={<h1>Register Page</h1>} />
+          {sharedData ? (
+            <>
+              <Route path="/todos" element={<h1>Todos page</h1>} />
+              <Route path="/create" element={<h1>Create Page</h1>} />{" "}
+            </>
+          ) : (
+            <>
+              <Route path="/login" element={<h1>Login page</h1>} />
+              <Route path="/register" element={<Registerpage />} />
+            </>
+          )}
         </Route>
       </Routes>
     </>
