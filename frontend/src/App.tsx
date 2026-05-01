@@ -5,6 +5,7 @@ import "./style/main.css";
 import "./style/layout.css";
 import { useEffect, useState } from "react";
 import { Registerpage } from "./pages/Registerpage/Registerpage";
+import { Loginpage } from "./pages/Loginpage/Loginpage";
 
 export const App = () => {
   const [sharedData, setSharedData] = useState(null);
@@ -35,7 +36,7 @@ export const App = () => {
             </>
           ) : (
             <>
-              <Route path="/login" element={<h1>Login page</h1>} />
+              <Route path="/login" element={<Loginpage />} />
               <Route path="/register" element={<Registerpage />} />
             </>
           )}
