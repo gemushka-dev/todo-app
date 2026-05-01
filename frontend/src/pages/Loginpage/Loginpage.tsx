@@ -22,10 +22,12 @@ export const Loginpage = () => {
       credentials: "include",
     });
     if (!response.ok) {
-      return console.log("Error");
+      return alert(
+        response.status == 400 ? "Incorrect data" : "Check password or email",
+      );
     }
-    const dataRes = await response.json();
-    alert(dataRes);
+    await response.json();
+    alert("Successfully loged");
   }
   return (
     <>
