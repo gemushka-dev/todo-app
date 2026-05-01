@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
+import "../../style/register.css";
 
 export const Registerpage = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
