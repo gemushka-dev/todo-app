@@ -1,0 +1,77 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+.todos {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+}
+.todos__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+.form__input {
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+.form__button {
+  background-color: #000;
+  color: white;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-size: 1rem;
+  transition: 0.4s ease-out;
+}
+.form__button:hover {
+  opacity: 0.9;
+}
+.todos__list {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 0.5rem;
+}
+.todos__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+.todo__title {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.todo__content {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.todo__btn {
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  filter: grayscale(1);
+  transition: filter 0.2s;
+}
+
+.todo__btn:hover {
+  filter: grayscale(0);
+}
