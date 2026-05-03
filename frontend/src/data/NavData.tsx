@@ -9,5 +9,4 @@ export const NavData: Array<NavItem> = [
 export const NavDataAuth: Array<NavItem> = [
   { label: "Home", href: "/" },
   { label: "My todos", href: "/todos" },
-  { label: "Create", href: "/create" },
 ];
