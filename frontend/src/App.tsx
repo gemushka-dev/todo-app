@@ -3,28 +3,15 @@ import { LayOut } from "./components/Layout";
 import { HomePage } from "./pages/Homepage/Homepage";
 import "./style/main.css";
 import "./style/layout.css";
-import { useEffect, useState } from "react";
 import { Registerpage } from "./pages/Registerpage/Registerpage";
 import { Loginpage } from "./pages/Loginpage/Loginpage";
 import { Todospage } from "./pages/Todospage/Todospage";
+import { useAuth } from "./hooks/useAuth";
 
 export const App = () => {
-  const [sharedData, setSharedData] = useState(null);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:3500/me", {
-        credentials: "include",
-      });
-      if (!response.ok) {
-        console.log("Error with cookies");
-      } else {
-        const data = await response.json();
-        setSharedData(data);
-        console.log(data);
-      }
-    }
-    fetchData();
-  }, []);
+  const { sharedData, isLoading } = useAuth();
+
+  if (isLoading) return <div>Loading...</div>;
   return (
     <>
       <Routes>
