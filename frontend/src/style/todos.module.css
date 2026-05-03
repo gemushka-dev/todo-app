@@ -56,11 +56,15 @@ main {
 .todo__title {
   font-size: 1.2rem;
   color: #1a1a1a;
+  word-break: break-all;
+  max-width: 100%;
 }
 
 .todo__content {
   font-size: 0.9rem;
   color: #888;
+  word-break: break-all;
+  max-width: 100%;
 }
 
 .todo__btn {
