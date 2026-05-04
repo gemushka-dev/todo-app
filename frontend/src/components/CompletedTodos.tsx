@@ -9,9 +9,10 @@ export const CompletedTodos = ({
   todos: TodoItemType[];
   deleteTodo: (id: number) => Promise<void>;
 }) => {
+  const completedTasks = todos.filter((el) => el.status === "completed");
   return (
     <div className={styles.todos__list}>
-      {todos.length > 0 ? (
+      {completedTasks.length > 0 ? (
         todos.map(
           (el) =>
             el.status === "completed" && (
@@ -30,7 +31,9 @@ export const CompletedTodos = ({
             ),
         )
       ) : (
-        <h3>There are no todos</h3>
+        <h3 style={{ textAlign: "center" }}>
+          You haven't finished anything yet. Let's get to work!
+        </h3>
       )}
     </div>
   );

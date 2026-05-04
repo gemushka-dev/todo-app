@@ -11,9 +11,11 @@ export const ActiveTodos = ({
   updateTodoStatus: (id: number, status: string) => Promise<void>;
   deleteTodo: (id: number) => Promise<void>;
 }) => {
+  const activeTasks = todos.filter((el) => el.status === "pending");
+
   return (
     <div className={styles.todos__list}>
-      {todos.length > 0 ? (
+      {activeTasks.length > 0 ? (
         todos.map(
           (el) =>
             el.status === "pending" && (
@@ -38,7 +40,7 @@ export const ActiveTodos = ({
             ),
         )
       ) : (
-        <h3>There are no todos</h3>
+        <h3 style={{ textAlign: "center" }}>Relax. All tasks done.</h3>
       )}
     </div>
   );
