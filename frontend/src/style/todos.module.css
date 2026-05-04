@@ -79,3 +79,25 @@ main {
 .todo__btn:hover {
   filter: grayscale(0);
 }
+.content__btn {
+  padding: 1rem;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  max-width: 200px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.todos_btns {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+}
+.active {
+  background: transparent;
+  border: 2px solid black;
+  color: black;
+}
