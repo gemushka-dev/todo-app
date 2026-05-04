@@ -1,7 +1,11 @@
+import { useState } from "react";
+import { ActiveTodos } from "../../components/ActiveTodos";
+import { CompletedTodos } from "../../components/CompletedTodos";
 import { useTodos } from "../../hooks/useTodos";
 import styles from "../../style/todos.module.css";
 
 export const Todospage = () => {
+  const [isActive, setIsActive] = useState(true);
   const {
     todos,
     titleRef,
@@ -28,35 +32,39 @@ export const Todospage = () => {
         <button className={styles.form__button}>Create</button>
       </form>
 
-      <div className={styles.todos__list}>
-        {todos.length > 0 ? (
-          todos.map(
-            (el) =>
-              el.status === "pending" && (
-                <div className={styles.todos__item} key={el.todoId}>
-                  <h3 className={styles.todo__title}>{el.title}</h3>
-                  <p className={styles.todo__content}>{el.content}</p>
-                  <div className="btns">
-                    <button
-                      className={styles.todo__btn}
-                      onClick={() => updateTodoStatus(el.todoId, "completed")}
-                    >
-                      ✅
-                    </button>
-                    <button
-                      className={styles.todo__btn}
-                      onClick={() => deleteTodo(el.todoId)}
-                    >
-                      🗑
-                    </button>
-                  </div>
-                </div>
-              ),
-          )
-        ) : (
-          <h3>There are no todos</h3>
-        )}
+      <div className={styles.todos_btns}>
+        <button
+          className={
+            isActive
+              ? `${styles.content__btn} ${styles.active}`
+              : styles.content__btn
+          }
+          onClick={() => setIsActive(true)}
+        >
+          Active
+        </button>
+        <button
+          className={
+            isActive
+              ? styles.content__btn
+              : `${styles.content__btn} ${styles.active}`
+          }
+          onClick={() => setIsActive(false)}
+        >
+          Completed
+        </button>
       </div>
+
+      {isActive ? (
+        <ActiveTodos
+          todos={todos}
+          styles={styles}
+          updateTodoStatus={updateTodoStatus}
+          deleteTodo={deleteTodo}
+        />
+      ) : (
+        <CompletedTodos todos={todos} styles={styles} deleteTodo={deleteTodo} />
+      )}
     </section>
   );
 };
