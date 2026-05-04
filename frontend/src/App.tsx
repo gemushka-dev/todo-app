@@ -7,6 +7,7 @@ import { Registerpage } from "./pages/Registerpage/Registerpage";
 import { Loginpage } from "./pages/Loginpage/Loginpage";
 import { Todospage } from "./pages/Todospage/Todospage";
 import { useAuth } from "./hooks/useAuth";
+import { Error404 } from "./pages/Erorrspages/Error404";
 
 export const App = () => {
   const { sharedData, isLoading } = useAuth();
@@ -27,6 +28,7 @@ export const App = () => {
               <Route path="/register" element={<Registerpage />} />
             </>
           )}
+          <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>
     </>

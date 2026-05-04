@@ -1,0 +1,41 @@
+.error {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.error__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+.error__code {
+  color: #666;
+  font-weight: 800;
+  font-size: 8rem;
+}
+.home {
+  padding: 1.5rem;
+  background: black;
+  color: white;
+  border-radius: 1.5rem;
+  transition: 0.4s ease-out;
+}
+.home:hover {
+  opacity: 0.9;
+}
+@media screen and (max-width: 768px) {
+  .error {
+    flex-direction: column;
+    align-items: center;
+  }
+  .error__code {
+    font-size: 4rem;
+  }
+  .error__container {
+    align-items: center;
+  }
+  .error_message {
+    font-size: 1rem;
+  }
+}
